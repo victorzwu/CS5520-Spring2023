@@ -12,7 +12,6 @@ export default function Input({textUpdateFunction}) {
         onChangeText={(changedText) => {
             textUpdateFunction(changedText)
             setText(changedText)}}/>
-        {/* <Text>{text}</Text> */}
     </View>
   )
 }
