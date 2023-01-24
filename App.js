@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, Image } from 'react-native';
 import { useState } from 'react';
 import Header from './components/Header';
 import Input from './components/Input';
@@ -11,13 +11,19 @@ export default function App() {
   function onTextEnter(changedText)
   {
     setEnteredText(changedText)
+    setModalVisible(false)
+  }
+  function onCancel()
+  {
+    setModalVisible(false)
   }
   return (
       <View style={styles.container}>
       <Header appName = {name}/>
-      <Input textUpdateFunction={onTextEnter} modalVisible={modalVisible} setModalVisible = {setModalVisible}/>
-      <Button title = "Modal" onPress={()=> setModalVisible(true)}/>
+      <Input textUpdateFunction={onTextEnter} modalVisible={modalVisible} onCancel = {onCancel}/>
+      <Button title = "Click to Input" onPress={()=> setModalVisible(true)}/>
       <Text>{enteredText}</Text>
+      <Image source = {{uri: "https://cdn-icons-png.flaticon.com/512/2617/2617812.png"}} style = {{height: 100}}/>
       <StatusBar style="auto" />
     </View>
   );
