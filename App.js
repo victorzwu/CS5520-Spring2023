@@ -22,8 +22,7 @@ export default function App() {
       <Header appName = {name}/>
       <Input textUpdateFunction={onTextEnter} modalVisible={modalVisible} onCancel = {onCancel}/>
       <Button title = "Click to Input" onPress={()=> setModalVisible(true)}/>
-      <Text>{enteredText}</Text>
-      <Image source = {{uri: "https://cdn-icons-png.flaticon.com/512/2617/2617812.png"}} style = {{height: 100}}/>
+      <Text style = {{color: 'purple'}}>{enteredText}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -35,5 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 10
   },
 });
