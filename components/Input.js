@@ -22,22 +22,33 @@ export default function Input({ textUpdateFunction, modalVisible, onCancel }) {
           }}
           style={{ height: 100, width: 100, margin: 10 }}
         />
+
         <TextInput
-          style={{ borderBottomColor: "blue", borderBottomWidth: 1, padding: 10 }}
+          style={{
+            borderBottomColor: "blue",
+            borderBottomWidth: 1,
+            padding: 10,
+          }}
           value={text}
           placeholder="Enter text here"
           onChangeText={(changedText) => {
             setText(changedText);
           }}
         />
-        <Button
-          title="Confirm"
-          onPress={() => {
-            textUpdateFunction(text);
-            setText("");
-          }}
-        />
-        <Button title="Cancel" onPress={() => onCancel()} />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button
+              title="Confirm"
+              onPress={() => {
+                textUpdateFunction(text);
+                setText("");
+              }}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button color="red" title="Cancel" onPress={() => onCancel()} />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -50,5 +61,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 10,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+  },
+  button: {
+    margin: 10,
   },
 });
