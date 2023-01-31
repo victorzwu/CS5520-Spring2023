@@ -6,10 +6,15 @@ import Input from "./components/Input";
 
 export default function App() {
   const name = "CS 5520";
-  const [enteredText, setEnteredText] = useState("");
+  // const [enteredText, setEnteredText] = useState("");
+  const [goals, setGoals] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   function onTextEnter(changedText) {
-    setEnteredText(changedText);
+    let newGoal = { id: Math.random(), text: changedText  };
+    // setGoals([...goals, newGoal])
+    //console.log(goals) <- we don't know when this is done because it's asynchronous
+    setGoals((prevGoals) => [...prevGoals, newGoal]);
+    //this makes sure the latest value for the state variable is used
     setModalVisible(false);
   }
   function onCancel() {
@@ -17,7 +22,7 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <View style = {styles.smallContainer}>
+      <View style={styles.smallContainer}>
         <Header appName={name} />
         <Input
           textUpdateFunction={onTextEnter}
@@ -26,10 +31,14 @@ export default function App() {
         />
         <Button title="Click to Input" onPress={() => setModalVisible(true)} />
       </View>
-      <View style = {styles.bigContainer}>
-        <View style = {styles.textContainer}>
-        <Text style={ styles.text}>{enteredText}</Text>
-        </View>
+      <View style={styles.bigContainer}>
+        {goals.map((goal) => {
+          return (
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>{goal.text}</Text>
+            </View>
+          );
+        })}
         <StatusBar style="auto" />
       </View>
     </View>
@@ -46,23 +55,23 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   bigContainer: {
     flex: 4,
-    backgroundColor: 'lightgrey',
-    alignItems: 'center',
-
+    backgroundColor: "lightgrey",
+    alignItems: "center",
   },
-  textContainer:{
-    borderColor: 'grey',
-    backgroundColor: 'grey',
+  textContainer: {
+    borderColor: "grey",
+    backgroundColor: "grey",
     borderRadius: 5,
     borderWidth: 2,
+    margin: 5
   },
-  text:{
-
-    color: 'purple',
-  }
+  text: {
+    color: "purple",
+    padding: 5
+  },
 });
