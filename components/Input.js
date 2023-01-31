@@ -43,6 +43,7 @@ export default function Input({ textUpdateFunction, modalVisible, onCancel }) {
                 textUpdateFunction(text);
                 setText("");
               }}
+              disabled={!(text.length)}
             />
           </View>
           <View style={styles.button}>

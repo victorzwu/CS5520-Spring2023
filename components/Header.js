@@ -8,7 +8,7 @@ export default function Header({ appName }) {
       <Text
         style={{
           borderColor: "purple",
-          borderWidth: "1",
+          borderWidth: 1,
           padding: 5,
           margin: 5,
           color: "purple",
