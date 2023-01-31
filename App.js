@@ -27,7 +27,9 @@ export default function App() {
         <Button title="Click to Input" onPress={() => setModalVisible(true)} />
       </View>
       <View style = {styles.bigContainer}>
+        <View style = {styles.textContainer}>
         <Text style={ styles.text}>{enteredText}</Text>
+        </View>
         <StatusBar style="auto" />
       </View>
     </View>
@@ -51,11 +53,16 @@ const styles = StyleSheet.create({
     flex: 4,
     backgroundColor: 'lightgrey',
     alignItems: 'center',
+
+  },
+  textContainer:{
+    borderColor: 'grey',
+    backgroundColor: 'grey',
+    borderRadius: 5,
+    borderWidth: 2,
   },
   text:{
-    borderRadius: 5,
+
     color: 'purple',
-    borderWidth: 2,
-    borderColor: 'grey',
   }
 });
