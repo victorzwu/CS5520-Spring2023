@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import Header from "./components/Header";
 import Input from "./components/Input";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const name = "CS 5520";
@@ -46,9 +47,7 @@ export default function App() {
           data={goals}
           renderItem={({item}) => {
             return (
-              <View style={styles.textContainer}>
-                <Text style={styles.text}>{item.text}</Text>
-              </View>
+              <GoalItem item = {item} styles = {styles}/>
             );
           }}
         />
