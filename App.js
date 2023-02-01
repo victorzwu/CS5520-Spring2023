@@ -27,6 +27,12 @@ export default function App() {
     //this makes sure the latest value for the state variable is used
     setModalVisible(false);
   }
+  function removeGoal(removeId) {
+    let newGoals = goals.filter((goal) => {
+      goal.id !== removeId;
+    });
+    setGoals();
+  }
   function onCancel() {
     setModalVisible(false);
   }
@@ -45,9 +51,9 @@ export default function App() {
         <FlatList
           contentContainerStyle={styles.scrollViewContentContainer}
           data={goals}
-          renderItem={({item}) => {
+          renderItem={({ item }) => {
             return (
-              <GoalItem item = {item} styles = {styles}/>
+              <GoalItem item={item} styles={styles} removeGoal={removeGoal} />
             );
           }}
         />
@@ -95,10 +101,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2,
     margin: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   text: {
     color: "purple",
     padding: 5,
     fontSize: 30,
+    marginHorizontal: 10,
   },
 });
