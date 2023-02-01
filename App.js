@@ -42,6 +42,7 @@ export default function App() {
       </View>
       <View style={styles.bigContainer}>
         <FlatList
+          contentContainerStyle={styles.scrollViewContentContainer}
           data={goals}
           renderItem={({item}) => {
             return (
@@ -85,7 +86,6 @@ const styles = StyleSheet.create({
   bigContainer: {
     flex: 4,
     backgroundColor: "lightgrey",
-    alignItems: "center"
   },
   scrollViewContentContainer: {
     alignItems: "center",
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2,
     margin: 5,
-    alignItems: "center"
   },
   text: {
     color: "purple",
