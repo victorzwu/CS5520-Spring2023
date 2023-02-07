@@ -38,7 +38,7 @@ export default function App() {
   }
   function onGoalPress(id)
   {
-    console.log(id);
+    console.log("goal item pressed: " + id);
   }
   return (
     <View style={styles.container}>
