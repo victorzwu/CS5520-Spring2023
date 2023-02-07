@@ -22,7 +22,6 @@ export default function App() {
   function onTextEnter(changedText) {
     let newGoal = { id: Math.random(), text: changedText };
     // setGoals([...goals, newGoal])
-    //console.log(goals) <- we don't know when this is done because it's asynchronous
     setGoals((prevGoals) => [...prevGoals, newGoal]);
     //this makes sure the latest value for the state variable is used
     setModalVisible(false);
@@ -36,6 +35,10 @@ export default function App() {
   }
   function onCancel() {
     setModalVisible(false);
+  }
+  function onGoalPress(id)
+  {
+    console.log(id);
   }
   return (
     <View style={styles.container}>
@@ -54,7 +57,7 @@ export default function App() {
           data={goals}
           renderItem={({ item }) => {
             return (
-              <GoalItem item={item} styles={styles} removeGoal={removeGoal} />
+              <GoalItem item={item} styles={styles} removeGoal={removeGoal} onGoalPress={onGoalPress} />
             );
           }}
         />
