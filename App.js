@@ -114,4 +114,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginHorizontal: 10,
   },
+  pressedStyle:
+  {
+    backgroundColor: "pink",
+    opacity: ".5"
+  }
 });
