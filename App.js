@@ -28,10 +28,11 @@ export default function App() {
     setModalVisible(false);
   }
   function removeGoal(removeId) {
-    let newGoals = goals.filter((goal) => {
-      goal.id !== removeId;
+    setGoals((prevGoals) => {
+      return prevGoals.filter((goal) => {
+        return goal.id !== removeId;
+      });
     });
-    setGoals();
   }
   function onCancel() {
     setModalVisible(false);
