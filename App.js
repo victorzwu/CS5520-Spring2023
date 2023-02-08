@@ -118,5 +118,14 @@ const styles = StyleSheet.create({
   {
     backgroundColor: "pink",
     opacity: ".5"
+  },
+  pressableButtonPressed:
+  {
+    backgroundColor: "pink",
+    opacity: ".5"
+  },
+  pressableButtonUnpressed:
+  {
+    justifyContent: "center"
   }
 });
