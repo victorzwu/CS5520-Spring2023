@@ -1,131 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Button,
-  Image,
-  ScrollView,
-  FlatList,
-} from "react-native";
-import { useState } from "react";
-import Header from "./components/Header";
-import Input from "./components/Input";
-import GoalItem from "./components/GoalItem";
+import { View, Text } from "react-native";
+import React from "react";
+import Home from "./Home";
+import GoalDetails from "./components/GoalDetails";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const name = "CS 5520";
-  // const [enteredText, setEnteredText] = useState("");
-  const [goals, setGoals] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  function onTextEnter(changedText) {
-    let newGoal = { id: Math.random(), text: changedText };
-    // setGoals([...goals, newGoal])
-    setGoals((prevGoals) => [...prevGoals, newGoal]);
-    //this makes sure the latest value for the state variable is used
-    setModalVisible(false);
-  }
-  function removeGoal(removeId) {
-    setGoals((prevGoals) => {
-      return prevGoals.filter((goal) => {
-        return goal.id !== removeId;
-      });
-    });
-  }
-  function onCancel() {
-    setModalVisible(false);
-  }
-  function onGoalPress(id)
-  {
-    console.log("goal item pressed: " + id);
-  }
   return (
-    <View style={styles.container}>
-      <View style={styles.smallContainer}>
-        <Header appName={name} />
-        <Input
-          textUpdateFunction={onTextEnter}
-          modalVisible={modalVisible}
-          onCancel={onCancel}
-        />
-        <Button title="Click to Input" onPress={() => setModalVisible(true)} />
-      </View>
-      <View style={styles.bigContainer}>
-        <FlatList
-          contentContainerStyle={styles.scrollViewContentContainer}
-          data={goals}
-          renderItem={({ item }) => {
-            return (
-              <GoalItem item={item} styles={styles} removeGoal={removeGoal} onGoalPress={onGoalPress} />
-            );
-          }}
-        />
-        {/* <ScrollView
-          alwaysBounceVertical={false}
-          contentContainerStyle={styles.scrollViewContentContainer}
-        >
-          {goals.map((goal) => {
-            return (
-              <View key={goal.id} style={styles.textContainer}>
-                <Text style={styles.text}>{goal.text}</Text>
-              </View>
-            );
-          })}
-          <StatusBar style="auto" />
-        </ScrollView> */}
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Details" component={GoalDetails} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    alignItems: "stretch",
-    justifyContent: "center",
-    margin: 10,
-  },
-  smallContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bigContainer: {
-    flex: 4,
-    backgroundColor: "lightgrey",
-  },
-  scrollViewContentContainer: {
-    alignItems: "center",
-  },
-  textContainer: {
-    borderColor: "grey",
-    backgroundColor: "grey",
-    borderRadius: 5,
-    borderWidth: 2,
-    margin: 5,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  text: {
-    color: "purple",
-    padding: 5,
-    fontSize: 30,
-    marginHorizontal: 10,
-  },
-  pressedStyle:
-  {
-    backgroundColor: "pink",
-    opacity: ".5"
-  },
-  pressableButtonPressed:
-  {
-    backgroundColor: "pink",
-    opacity: ".5"
-  },
-  pressableButtonUnpressed:
-  {
-    justifyContent: "center"
-  }
-});

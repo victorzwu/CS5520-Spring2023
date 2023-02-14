@@ -10,7 +10,7 @@ export default function GoalItem({ item, styles, removeGoal, onGoalPress }) {
         return [styles.textContainer, data.pressed && styles.pressedStyle];
       }}
       // android_ripple={{ color: "red", foreground: "true" }}
-      onPress={() => onGoalPress(item.id)}
+      onPress={() => onGoalPress(item)}
     >
       <Text style={styles.text}>{item.text}</Text>
 
