@@ -37,7 +37,7 @@ export default function Home({ navigation }) {
     setModalVisible(false);
   }
   function onGoalPress(item) {
-    navigation.navigate("Details", item);
+    navigation.navigate("Details", {item: item});
   }
   return (
     <View style={styles.container}>
