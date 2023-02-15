@@ -1,7 +1,7 @@
 import { View, Text, Pressable, Button } from "react-native";
 import React from "react";
 
-export default function PressableButton({styles, title, onPress, children}) {
+export default function PressableButton({styles,onPress, children}) {
   return (
     <Pressable
     style={({pressed}) => {
