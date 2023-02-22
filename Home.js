@@ -9,29 +9,49 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Input from "./components/Input";
 import GoalItem from "./components/GoalItem";
+import { deleteFromDB, writeToDB } from "./Firebase/fireStoreHelper";
+import { firestore } from "./Firebase/firebase-setup";
+import { collection, onSnapshot } from "firebase/firestore";
 
 export default function Home({ navigation }) {
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(firestore, "goals"), (querySnapshot) => {
+      if (querySnapshot.empty) {
+        setGoals([]);
+      } else {
+        let emptyArr = [];
+        querySnapshot.docs.forEach((snap) =>
+          emptyArr.push({ ...snap.data(), id: snap.id })
+        );
+        setGoals(emptyArr);
+      }
+    });
+    return () => {unsubscribe();}
+  }, []);
   const name = "CS 5520";
   // const [enteredText, setEnteredText] = useState("");
   const [goals, setGoals] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   function onTextEnter(changedText) {
-    let newGoal = { id: Math.random(), text: changedText };
+    let newGoal = { text: changedText };
+    writeToDB(newGoal);
     // setGoals([...goals, newGoal])
-    setGoals((prevGoals) => [...prevGoals, newGoal]);
+    // setGoals((prevGoals) => [...prevGoals, newGoal]);
     //this makes sure the latest value for the state variable is used
     setModalVisible(false);
   }
   function removeGoal(removeId) {
-    setGoals((prevGoals) => {
-      return prevGoals.filter((goal) => {
-        return goal.id !== removeId;
-      });
-    });
+    console.log(removeId)
+    deleteFromDB(removeId);
+    // setGoals((prevGoals) => {
+    //   return prevGoals.filter((goal) => {
+    //     return goal.id !== removeId;
+    //   });
+    // });
   }
   function onCancel() {
     setModalVisible(false);
