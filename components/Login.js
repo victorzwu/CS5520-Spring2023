@@ -1,26 +1,40 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Button } from "react-native";
 import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase/firebase-setup";
 
-export default function Login({signUpHandler, loginHandler}) {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const loginHandler = async () => {
+    try {
+      const userCred = await signInWithEmailAndPassword(auth, email, password);
+      // console.log(userCred);
+    } catch (err) {
+      console.log("login err ", err);
+    }
+  };
+  function signUpHandler() {
+    navigation.replace("Signup");
+  }
+
   return (
     <View>
       <Text>Email</Text>
       <TextInput
         value={email}
-        onChange={(newEmail) => setEmail(newEmail)}
+        onChangeText={(newEmail) => setEmail(newEmail)}
         placeholder="Email"
       />
       <Text>Password</Text>
       <TextInput
         value={password}
-        onChange={(newPassword) => setPassword(newPassword)}
+        onChangeText={(newPassword) => setPassword(newPassword)}
         placeholder="Password"
       />
-      <Button title = "Register" onPress={signUpHandler}/>
-      <Button title = "New User? Create an Account" onPress={loginHandler}/>
+      <Button title="Login" onPress={loginHandler} />
+      <Button title="New User? Create an Account" onPress={signUpHandler} />
     </View>
-
   );
 }
