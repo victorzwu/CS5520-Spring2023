@@ -5,6 +5,8 @@ import GoalDetails from "./components/GoalDetails";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FontAwesome } from '@expo/vector-icons'; 
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +19,8 @@ export default function App() {
           headerTintColor: "pink",
         }}
       >
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name = "Login" component = {Login} />
+        <Stack.Screen name = "Signup" component = {Signup}/>
         <Stack.Screen
           name="Details"
           component={GoalDetails}
